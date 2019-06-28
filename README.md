@@ -5,7 +5,7 @@ Demo bao gồm các thành phần
 - MainActivity.java: 
 	Activity chính của app, chứa custom list
 	Khi mở app, tiến hành gửi request lấy data và đổ vào list
-	Nếu không request lỗi, load từ local data (có thể implement database local trong tương lai)
+	Nếu request lỗi, load từ local data (có thể implement database local trong tương lai)
 
 - RecyclerViewAdapter.java: 
 	Adapter phục vụ cho việc đổ data vào list
