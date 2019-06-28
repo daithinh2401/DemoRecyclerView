@@ -6,6 +6,9 @@ Demo bao gồm các thành phần
 	+ Activity chính của app, chứa custom list
 	+ Khi mở app, tiến hành gửi request lấy data và đổ vào list
 	+ Nếu request lỗi, load từ local data (có thể implement database local trong tương lai)
+	
+- StaticData.java:
+	+ Local data sử dụng khi request lỗi
 
 - RecyclerViewAdapter.java: 
 	+ Adapter phục vụ cho việc đổ data vào list
