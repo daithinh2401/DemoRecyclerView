@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DemoRecyclerView</string>
+    <string name="title">Từ khoá hot</string>
+</resources>
