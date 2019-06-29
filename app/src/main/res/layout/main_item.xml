@@ -2,24 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/shape_for_item">
+   style="@style/main_item_layout">
 
     <TextView
         android:id="@+id/key"
-        android:text="anh chính là\nthanh xuân của em"
-        android:lines="2"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"/>
+        style="@style/main_item_text_view"/>
 
 </LinearLayout>

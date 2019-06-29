@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DemoRecyclerView</string>
     <string name="title">Từ khoá hot</string>
+    <string name="item_text_demo">kem chống nắng</string>
 </resources>
