@@ -1,6 +1,8 @@
 package com.example.demorecyclerview;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         ArrayList<String> staticData = getStaticData();
 
-        mDataManager = new DataManager();
+        mDataManager = DataManager.getInstance();
 
         adapter = new RecyclerViewAdapter(this, staticData);
 
@@ -41,19 +43,21 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
 
         cancelDialog();
 
         mDataManager.cancelPendingRequest();
         mDataManager.removeObserver();
+        removeWifiReceiver();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mDataManager.registerObserver(this);
+        registerWifiReceiver();
 
         doGetRequest();
     }
@@ -106,5 +110,20 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         }
 
         return listKey;
+    }
+
+    private WifiReceiver mWifiReceiver;
+
+    private void registerWifiReceiver(){
+        mWifiReceiver = new WifiReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mWifiReceiver, intentFilter);
+    }
+
+    private void removeWifiReceiver(){
+        if(mWifiReceiver != null){
+            unregisterReceiver(mWifiReceiver);
+        }
     }
 }

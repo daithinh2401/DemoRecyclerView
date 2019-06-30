@@ -38,6 +38,13 @@ public class DataManager {
             mRequestKeyListener.onRequestFail();
     }
 
+    private static DataManager mInstance;
+    public static DataManager getInstance(){
+        if(mInstance == null){
+            mInstance = new DataManager();
+        }
+        return mInstance;
+    }
     public DataManager(){ mListKey = new ArrayList<>(); }
 
     // Using mListKey to cache data got from request api
