@@ -26,26 +26,20 @@ public class DataManager {
     public void setObserver(RequestKeyListener observer){
         mRequestKeyListener = observer;
     }
-
     public void removeObserver(){
         mRequestKeyListener = null;
     }
 
+    public DataManager(){ mListKey = new ArrayList<>(); }
 
-    public DataManager(){
-        mListKey = new ArrayList<>();
-    }
-
-
+    // Using mListKey to cache data got from request api
     private ArrayList<String> mListKey;
-    public ArrayList<String> getListKey(){
-        return mListKey;
-    }
-
-
+    public ArrayList<String> getListKey(){ return mListKey; }
 
     // Parse Json from response
     private ArrayList<String> parseJson(String jsonString){
+        if(TextUtils.isEmpty(jsonString)) return null;
+
         ArrayList<String> list = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
@@ -55,14 +49,13 @@ public class DataManager {
             }
         } catch (JSONException e) {
             Log.e("TAG", "parseJson(): Fail with Exception: " + e.toString());
-            mRequestKeyListener.onRequestFail();
+            list = null;
         }
 
         return list;
     }
 
-
-    // Background task to get data from url
+    /* --- RequestKeyTask to get data from url --- */
     private RequestKeyTask mRequestKeyTask = null;
     public void doGetRequest(){
         cancelPendingRequest();
@@ -123,7 +116,7 @@ public class DataManager {
                 //Set our result equal to our stringBuilder
                 result = stringBuilder.toString();
             }
-            catch(IOException e){
+            catch(Exception e){
                 Log.e("TAG", "RequestKeyTask.onPostExecute(): Fail with exception = " + e.toString());
             }
 
@@ -133,17 +126,17 @@ public class DataManager {
         protected void onPostExecute(String result){
             super.onPostExecute(result);
 
-            if(!TextUtils.isEmpty(result)){
-                Log.d("TAG", "RequestKeyTask.doInBackground(): result = " + result);
+            Log.d("TAG", "RequestKeyTask.doInBackground(): result = " + result);
 
-                mListKey = parseJson(result);
+            mListKey = parseJson(result);
+
+            if(mListKey != null)
                 mRequestKeyListener.onRequestSuccess();
-            }
-            else {
+            else
                 mRequestKeyListener.onRequestFail();
-            }
 
         }
     }
+    /* --- End of RequestKeyTask --- */
 
 }

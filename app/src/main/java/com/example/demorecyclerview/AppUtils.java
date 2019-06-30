@@ -1,5 +1,9 @@
 package com.example.demorecyclerview;
 
+import android.util.Log;
+
+import java.util.HashMap;
+
 public class AppUtils {
 
     // This will make 2 lines if keyword more than one
@@ -41,6 +45,67 @@ public class AppUtils {
         if (a > b)
             return a - b;
         return b - a;
+    }
 
+
+    // Simple unit test to check algorithm is returned true value
+    // Just use for testing only
+    public static boolean unitTest(){
+        String[] data = {
+            "xiaomi",
+            "bitis hunter",
+            "bts",
+            "balo",
+            "bitis hunter x",
+            "tai nghe",
+            "harry potter",
+            "anker",
+            "iphone",
+            "balo nữ",
+            "nguyễn nhật ánh",
+            "đắc nhân tâm",
+            "ipad",
+            "senka",
+            "tai nghe bluetooth",
+            "son",
+            "maybelline",
+            "laneige",
+            "kem chống nắng",
+            "anh chính là thanh xuân của em"
+        };
+
+        HashMap<String, String> resultMap = new HashMap<>();
+        resultMap.put("xiaomi", "xiaomi");
+        resultMap.put("bitis hunter", "bitis\nhunter");
+        resultMap.put("bts", "bts");
+        resultMap.put("balo", "balo");
+        resultMap.put("bitis hunter x", "bitis\nhunter x");
+        resultMap.put("tai nghe", "tai\nnghe");
+        resultMap.put("harry potter", "harry\npotter");
+        resultMap.put("anker", "anker");
+        resultMap.put("iphone", "iphone");
+        resultMap.put("balo nữ", "balo\nnữ");
+        resultMap.put("nguyễn nhật ánh", "nguyễn\nnhật ánh");
+        resultMap.put("đắc nhân tâm", "đắc nhân\ntâm");
+        resultMap.put("ipad", "ipad");
+        resultMap.put("senka", "senka");
+        resultMap.put("tai nghe bluetooth", "tai nghe\nbluetooth");
+        resultMap.put("son", "son");
+        resultMap.put("maybelline", "maybelline");
+        resultMap.put("laneige", "laneige");
+        resultMap.put("kem chống nắng", "kem chống\nnắng");
+        resultMap.put("anh chính là thanh xuân của em", "anh chính là\nthanh xuân của em");
+
+        for(String str: data){
+            String expect = resultMap.get(str);
+            String actual = replaceString(str);
+
+            if(!expect.equals(actual)){
+                Log.d("TAG" , "AppUtils.unitTest(): Failed in case - Expect: " + expect + " actual: " + actual);
+                return false;
+            }
+        }
+
+        return true;
     }
 }

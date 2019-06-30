@@ -29,15 +29,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mListKey = data;
     }
 
-    private int getRandomColor(){
-        Random rand = new Random();
-        int red = rand.nextInt(200);
-        int green = rand.nextInt(200);
-        int blue = rand.nextInt(200);
-
-        return Color.rgb(red,green,blue);
-    }
-
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -47,13 +38,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+
+        // Set random color to item layout
+        // This is optional
         int randomColor = getRandomColor();
         mGradientDrawable.setColor(randomColor);
 
+
+        // Using algorithm to make 2 lines if text has more than 1 line.
         String key = mListKey.get(position);
         key = AppUtils.replaceString(key);
 
         holder.key.setText(key);
+    }
+
+    private int getRandomColor(){
+        Random rand = new Random();
+        int red = rand.nextInt(200);
+        int green = rand.nextInt(200);
+        int blue = rand.nextInt(200);
+
+        return Color.rgb(red,green,blue);
     }
 
     @Override

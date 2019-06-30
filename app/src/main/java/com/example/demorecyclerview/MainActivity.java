@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,16 +33,13 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
         mDataManager = new DataManager();
         mDataManager.setObserver(this);
 
-        doGetRequest();
+//        Just use for testing only
+//        boolean unitTest = AppUtils.unitTest();
+//        Log.d("TAG", "MainActivity.onCreate(): unit test = " + unitTest);
+
     }
 
     @Override
@@ -50,6 +48,33 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         mDataManager.cancelPendingRequest();
         mDataManager.removeObserver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        doGetRequest();
+    }
+
+    private void doGetRequest(){
+        showDialog();
+
+        mDataManager.doGetRequest();
+    }
+
+    private ProgressDialog mDialog;
+    private void showDialog(){
+        mDialog = new ProgressDialog(this);
+        mDialog.setMessage("Get data, please wait...");
+        mDialog.show();
+    }
+
+    private void cancelDialog(){
+        if(mDialog != null && mDialog.isShowing()){
+            mDialog.dismiss();
+            mDialog = null;
+        }
     }
 
     @Override
@@ -79,26 +104,6 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         adapter.setData(list);
         adapter.notifyDataSetChanged();
-    }
-
-    private ProgressDialog mDialog;
-    private void showDialog(){
-        mDialog = new ProgressDialog(this);
-        mDialog.setMessage("Get data, please wait...");
-        mDialog.show();
-    }
-
-    private void cancelDialog(){
-        if(mDialog != null && mDialog.isShowing()){
-            mDialog.dismiss();
-            mDialog = null;
-        }
-    }
-
-    private void doGetRequest(){
-        showDialog();
-
-        mDataManager.doGetRequest();
     }
 
     private ArrayList<String> getStaticData(){
