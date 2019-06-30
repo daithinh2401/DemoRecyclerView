@@ -28,6 +28,15 @@ public class DataManager {
         mRequestKeyListener = null;
     }
 
+    private void notifyRequestSuccess(){
+        if(mRequestKeyListener != null)
+            mRequestKeyListener.onRequestSuccess();
+    }
+
+    private void notifyRequestFailed(){
+        if(mRequestKeyListener != null)
+            mRequestKeyListener.onRequestFail();
+    }
 
     public DataManager(){ mListKey = new ArrayList<>(); }
 
@@ -131,10 +140,10 @@ public class DataManager {
 
             if(parseResult != null) {
                 mListKey = parseResult;
-                mRequestKeyListener.onRequestSuccess();
+                notifyRequestSuccess();
             }
             else {
-                mRequestKeyListener.onRequestFail();
+                notifyRequestFailed();
             }
 
         }

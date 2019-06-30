@@ -21,9 +21,12 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        recyclerView = findViewById(R.id.recyclerView);
+
         ArrayList<String> staticData = getStaticData();
 
-        recyclerView = findViewById(R.id.recyclerView);
+        mDataManager = new DataManager();
+
         adapter = new RecyclerViewAdapter(this, staticData);
 
         layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -31,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-        mDataManager = new DataManager();
 
 //        Just use for testing only
 //        AppUtils.unitTest();
