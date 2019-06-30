@@ -8,8 +8,10 @@ public class AppUtils {
 
     // This will make 2 lines if keyword more than one
     public static String replaceString(String origin) {
-        int length = origin.length();
+
         char[] org = origin.toCharArray();
+        int length = org.length;
+
         int index = -1;
         int absoluteValue = 0;
 
@@ -48,30 +50,13 @@ public class AppUtils {
     }
 
 
-    // Simple unit test to check algorithm is returned true value
+    // Simple unit test to check above method is returned true value
     // Just use for testing only
-    public static boolean unitTest(){
-        String[] data = {
-            "xiaomi",
-            "bitis hunter",
-            "bts",
-            "balo",
-            "bitis hunter x",
-            "tai nghe",
-            "harry potter",
-            "anker",
-            "iphone",
-            "balo nữ",
-            "nguyễn nhật ánh",
-            "đắc nhân tâm",
-            "ipad",
-            "senka",
-            "tai nghe bluetooth",
-            "son",
-            "maybelline",
-            "laneige",
-            "kem chống nắng",
-            "anh chính là thanh xuân của em"
+    public static void unitTest(){
+        String[] data = { "xiaomi", "bitis hunter", "bts", "balo", "bitis hunter x", "tai nghe",
+                "harry potter", "anker", "iphone", "balo nữ", "nguyễn nhật ánh", "đắc nhân tâm", "ipad",
+                "senka", "tai nghe bluetooth", "son", "maybelline", "laneige", "kem chống nắng",
+                "anh chính là thanh xuân của em"
         };
 
         HashMap<String, String> resultMap = new HashMap<>();
@@ -102,10 +87,10 @@ public class AppUtils {
 
             if(!expect.equals(actual)){
                 Log.d("TAG" , "AppUtils.unitTest(): Failed in case - Expect: " + expect + " actual: " + actual);
-                return false;
+                return;
             }
         }
 
-        return true;
+        Log.d("TAG" , "AppUtils.unitTest(): Pass !");
     }
 }

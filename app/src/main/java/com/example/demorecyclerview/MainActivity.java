@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         mDataManager.setObserver(this);
 
 //        Just use for testing only
-//        boolean unitTest = AppUtils.unitTest();
-//        Log.d("TAG", "MainActivity.onCreate(): unit test = " + unitTest);
+//        AppUtils.unitTest();
 
     }
 
