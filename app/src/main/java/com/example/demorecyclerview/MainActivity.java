@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         recyclerView.setAdapter(adapter);
 
         mDataManager = new DataManager();
-        mDataManager.setObserver(this);
 
 //        Just use for testing only
 //        AppUtils.unitTest();
@@ -52,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
     @Override
     protected void onResume() {
         super.onResume();
+        mDataManager.registerObserver(this);
 
         doGetRequest();
     }

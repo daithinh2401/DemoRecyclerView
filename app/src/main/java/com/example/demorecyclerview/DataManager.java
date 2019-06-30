@@ -23,12 +23,13 @@ public class DataManager {
         void onRequestFail();
     }
 
-    public void setObserver(RequestKeyListener observer){
+    public void registerObserver(RequestKeyListener observer){
         mRequestKeyListener = observer;
     }
     public void removeObserver(){
         mRequestKeyListener = null;
     }
+
 
     public DataManager(){ mListKey = new ArrayList<>(); }
 
