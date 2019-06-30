@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        ArrayList<String> keys = new ArrayList<>();
+        ArrayList<String> staticData = getStaticData();
 
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(this, keys);
+        adapter = new RecyclerViewAdapter(this, staticData);
 
         layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -79,19 +79,12 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
     @Override
     public void onRequestSuccess() {
-        ArrayList<String> listKey = mDataManager.getListKey();
-        if(listKey.size() > 0){
-            adapter.setData(listKey);
-        } else {
-            // Use static data instead, can use data base in the future
-            ArrayList<String> list = getStaticData();
-            adapter.setData(list);
-        }
-
         cancelDialog();
 
-        adapter.notifyDataSetChanged();
+        ArrayList<String> listKey = mDataManager.getListKey();
+        adapter.setData(listKey);
 
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -100,10 +93,7 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         Toast.makeText(this, "Something wrong, please try again !", Toast.LENGTH_LONG).show();
 
-        ArrayList<String> list = getStaticData();
-
-        adapter.setData(list);
-        adapter.notifyDataSetChanged();
+        // Do nothing
     }
 
     private ArrayList<String> getStaticData(){

@@ -116,7 +116,7 @@ public class DataManager {
                 result = stringBuilder.toString();
             }
             catch(Exception e){
-                Log.e("TAG", "RequestKeyTask.onPostExecute(): Fail with exception = " + e.toString());
+                Log.e("TAG", "RequestKeyTask.doInBackground(): Fail with exception = " + e.toString());
             }
 
             return result;
@@ -125,14 +125,17 @@ public class DataManager {
         protected void onPostExecute(String result){
             super.onPostExecute(result);
 
-            Log.d("TAG", "RequestKeyTask.doInBackground(): result = " + result);
+            Log.d("TAG", "RequestKeyTask.onPostExecute(): result = " + result);
 
-            mListKey = parseJson(result);
+            ArrayList<String> parseResult = parseJson(result);
 
-            if(mListKey != null)
+            if(parseResult != null) {
+                mListKey = parseResult;
                 mRequestKeyListener.onRequestSuccess();
-            else
+            }
+            else {
                 mRequestKeyListener.onRequestFail();
+            }
 
         }
     }
