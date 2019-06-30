@@ -50,14 +50,12 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
         mDataManager.cancelPendingRequest();
         mDataManager.removeObserver();
-        removeWifiReceiver();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mDataManager.registerObserver(this);
-        registerWifiReceiver();
 
         doGetRequest();
     }
@@ -110,20 +108,5 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
         }
 
         return listKey;
-    }
-
-    private WifiReceiver mWifiReceiver;
-
-    private void registerWifiReceiver(){
-        mWifiReceiver = new WifiReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(mWifiReceiver, intentFilter);
-    }
-
-    private void removeWifiReceiver(){
-        if(mWifiReceiver != null){
-            unregisterReceiver(mWifiReceiver);
-        }
     }
 }
