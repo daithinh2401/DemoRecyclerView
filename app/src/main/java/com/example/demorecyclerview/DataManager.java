@@ -46,7 +46,7 @@ public class DataManager {
         }
         return mInstance;
     }
-    
+
     public DataManager(){ mListKey = new ArrayList<>(); }
 
     // Using mListKey to cache data got from request api
