@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
 
     private ProgressDialog mDialog;
     private void showDialog(){
-        mDialog = new ProgressDialog(this);
-        mDialog.setMessage("Get data, please wait...");
-        mDialog.show();
+//        mDialog = new ProgressDialog(this);
+//        mDialog.setMessage("Get data, please wait...");
+//        mDialog.show();
     }
 
     private void cancelDialog(){
-        if(mDialog != null && mDialog.isShowing()){
-            mDialog.dismiss();
-            mDialog = null;
-        }
+//        if(mDialog != null && mDialog.isShowing()){
+//            mDialog.dismiss();
+//            mDialog = null;
+//        }
     }
 
     @Override
