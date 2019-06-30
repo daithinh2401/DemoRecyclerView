@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements DataManager.Reque
     protected void onStop() {
         super.onStop();
 
+        cancelDialog();
+
         mDataManager.cancelPendingRequest();
         mDataManager.removeObserver();
     }

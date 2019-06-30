@@ -23,9 +23,7 @@ public class DataManager {
         void onRequestFail();
     }
 
-    public void registerObserver(RequestKeyListener observer){
-        mRequestKeyListener = observer;
-    }
+    public void registerObserver(RequestKeyListener observer){ mRequestKeyListener = observer; }
     public void removeObserver(){
         mRequestKeyListener = null;
     }
