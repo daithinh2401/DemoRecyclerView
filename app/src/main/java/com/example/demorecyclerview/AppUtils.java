@@ -13,13 +13,13 @@ public class AppUtils {
         int length = org.length;
 
         int index = -1;
-        int absoluteValue = 0;
+        int absoluteValue = -1;
 
         for (int i = 0; i < length; i++) {
             if (org[i] == ' ') {
                 int rightPart = getAbsoluteValue(length - 1, i);
 
-                if (absoluteValue == 0) {
+                if (absoluteValue == -1) {
                     absoluteValue = getAbsoluteValue(rightPart, i);
                     index = i;
                 } else {
